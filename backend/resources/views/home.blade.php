@@ -1,23 +1,23 @@
+
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
-    <div class="row">
-        <div class="col-md-8 col-md-offset-2">
-            <div class="panel panel-default">
-                <div class="panel-heading">Dashboard</div>
-
-                <div class="panel-body">
-                    @if (session('status'))
-                        <div class="alert alert-success">
-                            {{ session('status') }}
-                        </div>
-                    @endif
-
-                    You are logged in!
-                </div>
+@for($i = 1; $i<10; $i++)
+    <div class="card border-right-0 border-left-0 border-top-0" style="width: 100%;">
+        <div class="card-body">
+            <h5 class="card-title">user name</h5>
+            <p class="card-text">comment comment comment comment <br/> comment commetn</p>
+            <div class="card__icon-menu">
+                <a class="card__icon">
+                    <i class="far fa-comment"></i>
+                </a>
+                <a class="card__icon">
+                    <i class="far fa-heart"></i>
+                </a>
             </div>
         </div>
     </div>
-</div>
+@endfor
+
 @endsection
+
