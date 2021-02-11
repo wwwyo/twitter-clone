@@ -1,0 +1,28 @@
+li {
+  list-style: none;
+}
+
+/* header */
+.header__icon-group {
+  display: flex;
+  float: left;
+}
+
+.header__icon {
+  cursor: pointer;
+  margin-right: 15px;
+}
+
+/* post-index */
+.card__container {
+  border-bottom: 1px solid black;
+}
+
+.card__icon-menu {
+  
+}
+
+.card__icon {
+  margin-right: 16px;
+  cursor: pointer;
+}
