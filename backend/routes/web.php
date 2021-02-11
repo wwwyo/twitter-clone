@@ -6,4 +6,6 @@ Route::get('/', function () {
 
 Auth::routes();
 
+Route::get('/user/{id}', 'UserController@show')->name('user.show');
 Route::resource('/post', 'PostController');
+Route::resource('/comment', 'CommentController')->only('update');
