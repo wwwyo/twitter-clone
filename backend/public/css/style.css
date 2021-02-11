@@ -1,0 +1,63 @@
+li {
+  list-style: none;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.submit-btn {
+  width: 2rem;
+}
+
+/* header */
+.header__icon-group {
+  display: flex;
+  float: left;
+}
+
+.header__icon {
+  cursor: pointer;
+  margin-right: 50px;
+}
+
+/* post-index */
+.card__container {
+  text-decoration: none;
+}
+
+
+
+.card__icon-menu {
+  
+}
+
+.card__edit-link {
+  display: inline-block;
+  margin: 0 0 0 auto;
+}
+
+.card__icon {
+  cursor: pointer;
+  margin-right: 16px;
+}
+
+/* User */
+.user__show-card {
+  display: flex;
+}
+
+.user__show-card--link {
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  padding: 5px;
+}
+
+.user__show--post-link {
+  border-bottom: 1px solid blue;
+}
+
+.user__show--like-link {
+  border-bottom: 1px solid grey;
+}
