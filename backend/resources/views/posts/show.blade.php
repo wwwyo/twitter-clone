@@ -10,7 +10,9 @@
     
     <div class="card-body">
       <div class="d-flex">
-        <h5 class="card-title">{{ $post->user->name }}</h5>
+        <a href="{{route('user.show', $post->user->id)}}" class="card-title m-0" style="text-decoration: none; font-size: 2rem; color: black;">
+          {{ $post->user->name}}
+        </a>
         @if (Auth::id() === $post->user->id)
           <a href="{{ route('post.edit', $post)}}" class="card__edit-link">
             <i class="fas fa-edit"></i>

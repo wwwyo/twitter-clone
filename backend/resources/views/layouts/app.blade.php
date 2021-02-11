@@ -24,22 +24,12 @@
                 <a class="header__icon" href="{{ route('post.index') }}">
                     <i class="fas fa-home fa-2x"></i>
                 </a>
-                <a class="header__icon" href="">
+                <a class="header__icon" href="{{ route('user.show', Auth::id()) }}">
                     <i class="fas fa-user fa-2x"></i>
                 </a>
                 <a class="header__icon" href="{{ route('post.create') }}">
                     <i class="fas fa-plus-circle fa-2x"></i>
                 </a>
-                {{-- ToDo:ログアウト --}}
-                <a class="" href="{{ route('logout') }}"
-                onclick="event.preventDefault();
-                                document.getElementById('logout-form').submit();">
-                    ログアウト
-                </a>
-
-                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                    {{ csrf_field() }}
-                </form>
             </div>
         @else
             <li class="nav-item">
