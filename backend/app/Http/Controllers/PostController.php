@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Post;
+use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller
 {
@@ -12,9 +14,15 @@ class PostController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     public function index()
     {
-        return view('posts.index');
+        $posts = Post::orderBy('created_at', 'desc')->get();
+        return view('posts.index', ['posts' => $posts]);
     }
 
     /**
@@ -24,7 +32,7 @@ class PostController extends Controller
      */
     public function create()
     {
-        //
+        return view('posts.create');
     }
 
     /**
@@ -35,7 +43,19 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $params = $request->validate([
+            'text' => 'required|max:300',
+        ]);
+
+        if (Auth::check()) {
+            $user_id = Auth::id();
+
+        $post = new Post();
+        $post->text = $request->text;
+        $post->user_id = $user_id;
+        $post->save();
+        return redirect()->route('post.show', $post);
+        }
     }
 
     /**
@@ -46,7 +66,7 @@ class PostController extends Controller
      */
     public function show(Post $post)
     {
-        //
+        return view('posts.show', ['post' => $post]);
     }
 
     /**
@@ -57,7 +77,7 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
-        //
+        return view('posts.edit', ['post' => $post]);
     }
 
     /**
@@ -69,7 +89,11 @@ class PostController extends Controller
      */
     public function update(Request $request, Post $post)
     {
-        //
+        $params = $request->validate([
+            'text' => 'required|max:300'
+        ]);
+        $post->update($params);
+        return redirect()->route('post.show', ['post' => $post]);
     }
 
     /**
@@ -80,6 +104,7 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
-        //
+        $post->delete();
+        return redirect(route('post.index'));
     }
 }
