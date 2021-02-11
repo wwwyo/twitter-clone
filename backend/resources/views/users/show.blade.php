@@ -45,7 +45,7 @@
             </a>
             <div class="card__icon-menu">
               <a class="card__icon">
-                <i class="far fa-comment"></i>
+                <i class="far fa-comment">  {{ $post->comments->count() }}</i>
               </a>
               <a class="card__icon">
                 <i class="far fa-heart"></i>

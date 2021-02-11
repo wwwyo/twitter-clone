@@ -7,7 +7,7 @@
         <div class="card-body">
             <div class="d-flex">
               <a href="{{route('user.show', $post->user->id)}}" class="card-title m-0" style="text-decoration: none; font-size: 2rem; color: black;">
-                {{ $post->user->name}}
+                {{ $post->user->name }}
               </a>
               @if (Auth::id() === $post->user->id)
                 <a href="{{ route('post.edit', $post)}}" class="card__edit-link">
@@ -19,8 +19,8 @@
               {!! nl2br(e($post->text)) !!}
             </a>
             <div class="card__icon-menu">
-                <a class="card__icon">
-                    <i class="far fa-comment"></i>
+                <a href="{{ route('post.show', $post) }}" class="card__icon" style="color: black; text-decoration: none">
+                    <i class="far fa-comment">  {{ $post->comments->count() }}</i>
                 </a>
                 <a class="card__icon">
                     <i class="far fa-heart"></i>

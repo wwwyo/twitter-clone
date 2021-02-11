@@ -23,7 +23,7 @@
         <p class="card-text">{!! nl2br(e($post->text)) !!}</p>
         <div class="card__icon-menu">
             <a class="card__icon">
-                <i class="far fa-comment"></i>
+                <i class="far fa-comment">  {{ $post->comments->count() }}</i>
             </a>
             <a class="card__icon">
                 <i class="far fa-heart"></i>
@@ -31,25 +31,27 @@
         </div>
     </div>
   </div>
-  <div class="card border-0">
-    <div class="card-body">
-      <h5 class="card-title">
-        コメンテイター
-      </h5>
-      <p class="card-text">
-        コメントコメントコメント
-      </p>
+  <div class="comment__container">
+    @foreach ($post->comments as $comment)
+    <div class="card border-0">
+      <div class="card-body">
+        <h5 class="card-title">
+          {{ $comment->user->name }}
+        </h5>
+        <p class="card-text">
+          {{ $comment->text }}
+        </p>
+      </div>
     </div>
+    @endforeach
   </div>
-  <div class="card border-0">
-    <div class="card-body">
-      <h5 class="card-title">
-        コメンテイター
-      </h5>
-      <p class="card-text">
-        コメントコメントコメント
-      </p>
+  
+  
+  <form method="POST" action="{{ route('comment.store', $post) }}" class="input-group">
+    {{ csrf_field() }}
+    <textarea class="form-control" name="text" placeholder="コメントしてください"></textarea>
+    <div class="input-group-append">
+      <input class="btn btn-outline-secondary" type="submit">
     </div>
-  </div>
-    
+  </form>
 @endsection
