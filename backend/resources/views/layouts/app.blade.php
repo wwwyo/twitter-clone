@@ -19,26 +19,17 @@
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        @guest
-            <li class="nav-item">
-                <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
-            </li>
-            @if (Route::has('register'))
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-                </li>
-            @endif
-        @else
+        @auth
             <div class="header__icon-group">
-                <div class="header__icon">
+                <a class="header__icon" href="{{ route('post.index') }}">
                     <i class="fas fa-home fa-2x"></i>
-                </div>
-                <div class="header__icon">
+                </a>
+                <a class="header__icon" href="">
                     <i class="fas fa-user fa-2x"></i>
-                </div>
-                <div class="header__icon">
+                </a>
+                <a class="header__icon" href="{{ route('post.create') }}">
                     <i class="fas fa-plus-circle fa-2x"></i>
-                </div>
+                </a>
                 {{-- ToDo:ログアウト --}}
                 <a class="" href="{{ route('logout') }}"
                 onclick="event.preventDefault();
@@ -50,7 +41,16 @@
                     {{ csrf_field() }}
                 </form>
             </div>
-        @endguest
+        @else
+            <li class="nav-item">
+                <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+            </li>
+            @if (Route::has('register'))
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                </li>
+            @endif
+        @endauth
     </nav>
 
     <div class="container">
