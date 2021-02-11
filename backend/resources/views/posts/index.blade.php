@@ -2,11 +2,21 @@
 @extends('layouts.app')
 
 @section('content')
-@for($i = 1; $i<10; $i++)
+@foreach($posts as $post)
     <div class="card border-right-0 border-left-0 border-top-0" style="width: 100%;">
         <div class="card-body">
-            <h5 class="card-title">user name</h5>
-            <p class="card-text">comment comment comment comment <br/> comment commetn</p>
+          
+            <div class="d-flex">
+              <h5 class="card-title">{{ $post->user->name}}</h5>
+              @if (Auth::id() === $post->user->id)
+                <a href="{{ route('post.edit', $post)}}" class="card__edit-link">
+                  <i class="fas fa-edit"></i>
+                </a>
+              @endif
+            </div>
+            <a href="{{ route('post.show', $post) }}" class="card-text d-block"  style="color: black; text-decoration: none">
+              {!! nl2br(e($post->text)) !!}
+            </a>
             <div class="card__icon-menu">
                 <a class="card__icon">
                     <i class="far fa-comment"></i>
@@ -17,7 +27,7 @@
             </div>
         </div>
     </div>
-@endfor
+@endforeach
 
 @endsection
 

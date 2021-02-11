@@ -16,8 +16,8 @@
       </div>
     @endif
     <div class="form-group">
-      <textarea name="text" id="text" cols="100" rows="10" placeholder="投稿内容を記載してください"></textarea>
+      <textarea class="p-3" name="text" id="text" cols="100" rows="10" placeholder="投稿内容を記載してください"></textarea>
     </div>
-    <input type="submit" class="btn btn-primary"/>
+    <input type="submit" class="btn btn-primary" style="width: 20%;"/>
   </form>
 @endsection

@@ -6,9 +6,18 @@
     投稿詳細
   </p>
 
-  <div class="card border-right-0 border-left-0 border-top-0" style="width: 100%;">
+  <div class="card border-right-0 border-left-0 border-top-0 card__container" style="width: 100%;">
+    
     <div class="card-body">
+      <div class="d-flex">
         <h5 class="card-title">{{ $post->user->name }}</h5>
+        @if (Auth::id() === $post->user->id)
+          <a href="{{ route('post.edit', $post)}}" class="card__edit-link">
+            <i class="fas fa-edit"></i>
+          </a>
+        @endif
+      </div>
+        
         <p class="card-text">{!! nl2br(e($post->text)) !!}</p>
         <div class="card__icon-menu">
             <a class="card__icon">
