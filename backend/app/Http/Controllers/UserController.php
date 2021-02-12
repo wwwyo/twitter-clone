@@ -13,10 +13,9 @@ class UserController extends Controller
         return view('users.show', ['user' => $user]);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    public function showLike($id)
+    {
+        $user = User::find($id);
+        return view('users.showLike', ['user' => $user]);
+    }
 }
