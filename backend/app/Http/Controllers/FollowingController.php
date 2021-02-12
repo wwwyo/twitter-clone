@@ -9,12 +9,6 @@ use Illuminate\Support\Facades\Auth;
 
 class FollowingController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-
     public function __construct()
     {
         $this->middleware('auth');
@@ -26,11 +20,6 @@ class FollowingController extends Controller
         return view('followings.index', ['user' => $user, 'login_user' => $login_user]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function store(User $user, Request $request)
     {
         $login_user_id = Auth::id();
@@ -42,13 +31,6 @@ class FollowingController extends Controller
         return redirect()->back();
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Following  $following
-     * @return \Illuminate\Http\Response
-     */
-    
     public function destroy(Following $following)
     {
         $following->delete();
