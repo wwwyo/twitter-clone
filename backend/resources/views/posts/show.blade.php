@@ -7,7 +7,6 @@
   </p>
 
   <div class="card border-right-0 border-left-0 border-top-0 card__container" style="width: 100%;">
-    
     <div class="card-body">
       <div class="d-flex">
         <a href="{{route('user.show', $post->user->id)}}" class="card-title m-0" style="text-decoration: none; font-size: 2rem; color: black;">
@@ -45,7 +44,6 @@
     </div>
     @endforeach
   </div>
-  
   
   <form method="POST" action="{{ route('comment.store', $post) }}" class="input-group">
     {{ csrf_field() }}

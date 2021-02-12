@@ -15,12 +15,29 @@
               {{ csrf_field() }}
           </form>
         @else 
-          <a href="" class="card__edit-link">
-            フォローする
-          </a>
+          @if (Auth::user()->followings()->where('following_user_id', $user->id)->first())
+            <a href="{{ route('following.destroy', Auth::user()->followings()->where('following_user_id', $user->id)->first()) }}" class="btn btn-sm btn-outline-primary card__edit-link"
+              onclick="event.preventDefault();
+                        document.getElementById('unfollowing-form').submit();">
+              フォロー中
+            </a>
+            <form id="unfollowing-form" method="POST" class="d-none" action=" {{ route('following.destroy', Auth::user()->followings()->where('following_user_id', $user->id)->first()) }} ">
+              {{ csrf_field() }}
+              {{ method_field('DELETE') }}
+            </form>
+          @else 
+            <a href="{{ route('following.store', $user) }}" class="btn btn-sm btn-outline-secondary card__edit-link"
+              onclick="event.preventDefault();
+                        document.getElementById('following-form').submit();">
+              フォローする
+            </a>
+            <form id="following-form" method="POST" action=" {{ route('following.store', $user) }} ">
+              {{ csrf_field() }}
+            </form>
+          @endif
         @endif
       </div>
-      <h5>3follow</h5>
+      <h5><a href="{{route('following.index', Auth::user())}}" style="text-decoration: none; color: black;">{{ $user->followings->count() }}follow</a></h5>
       <div class="d-flex justify-content-between">
         <div class="user__show-card--link user__show--post-link" style="width: 49%;">
           投稿
