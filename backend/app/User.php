@@ -7,6 +7,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use App\Post;
 use App\Comment;
 use App\Following;
+use App\Like;
 
 class User extends Authenticatable
 {
@@ -45,8 +46,8 @@ class User extends Authenticatable
         return $this->hasMany(Following::class);
     }
 
-    public function isFollowing($user_id)
+    public function likes()
     {
-        return $this->follows()->where('following_id', $user_id)->first(['id']);
+        return $this->hasMany(Like::class);
     }
 }
