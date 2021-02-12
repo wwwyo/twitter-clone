@@ -8,7 +8,7 @@
             <div class="card">
               <div class="card-header p-3">
                 <div class="d-flex" style="width: 30%;">
-                  <a href="{{ route('user.show', $user) }}" class="mb-0 text-reset">{{ $following_user_id->following_user->name }}</p>
+                  <a href="{{ route('user.show', $following_user_id->following_user) }}" class="mb-0 text-reset">{{ $following_user_id->following_user->name }}</p>
                 </div>
                 <div class="d-flex justify-content-end flex-grow-1 d-inline">
                   @if (Auth::id() === $following_user_id->user_id)

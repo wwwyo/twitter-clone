@@ -39,14 +39,17 @@
       </div>
       <h5><a href="{{route('following.index', $user) }}" style="text-decoration: none; color: black;">{{ $user->followings->count() }}follow</a></h5>
       <div class="d-flex justify-content-between">
-        <div class="user__show-card--link user__show--post-link" style="width: 49%;">
+        <a href="{{ route('user.show', $user) }}" class="user__show-card--link user__show--like-link text-reset" style="width: 49%; text-decoration: none;">
           投稿
-        </div>
-        <a href="{{ route('user.showLike', $user) }}" class="user__show-card--link user__show--like-link text-reset" style="width: 49%; text-decoration: none;">
-          いいね
         </a>
+        <div class="user__show-card--link user__show--post-link" style="width: 49%;">
+          いいね
+        </div>
       </div>
-        @foreach ($user->posts as $post)
+      @foreach($user->likes as $like)
+        @php
+          $post = $like->post
+        @endphp 
         <div class="card border-right-0 border-left-0 border-top-0" style="width: 100%;">
           <div class="card-body">
             <div class="d-flex">
@@ -77,7 +80,7 @@
                 </form>
               @else
                 <a href="{{ route('like.store', $post) }}" class="card__icon text-reset"
-                          onclick="event.preventDefault();
+                            onclick="event.preventDefault();
                                     document.getElementById('like-{{$post->id}}').submit();"
                 >
                   <i class="far fa-heart">  {{ $post->likes->count() }}</i>
