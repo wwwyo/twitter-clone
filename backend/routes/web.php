@@ -10,5 +10,9 @@ Route::get('/user/{id}', 'UserController@show')->name('user.show');
 Route::resource('/post', 'PostController');
 
 Route::group(['prefix' => 'post'], function() {
-    Route::resource('{post}/comment', 'CommentController')->only('store');
+    Route::post('{post}/comment', 'CommentController@store')->name('comment.store');
 });
+
+Route::get('user/{user}/following', 'FollowingController@index')->name('following.index');
+Route::post('user/{user}/following', 'FollowingController@store')->name('following.store');
+Route::delete('user/following/{following}', 'FollowingController@destroy')->name('following.destroy');
