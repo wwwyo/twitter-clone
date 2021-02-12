@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Following;
+use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class FollowingController extends Controller
 {
@@ -12,9 +14,16 @@ class FollowingController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+
+    public function __construct()
     {
-        //
+        $this->middleware('auth');
+    }
+
+    public function index(User $user)
+    {
+        $login_user = Auth::user();
+        return view('followings.index', ['user' => $user, 'login_user' => $login_user]);
     }
 
     /**
@@ -22,20 +31,15 @@ class FollowingController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function store(User $user, Request $request)
     {
-        //
-    }
+        $login_user_id = Auth::id();
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
+        $following = new Following();
+        $following->user_id = $login_user_id;
+        $following->following_user_id = $user->id;
+        $following->save();
+        return redirect()->back();
     }
 
     /**
@@ -44,42 +48,10 @@ class FollowingController extends Controller
      * @param  \App\Following  $following
      * @return \Illuminate\Http\Response
      */
-    public function show(Following $following)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Following  $following
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Following $following)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Following  $following
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Following $following)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Following  $following
-     * @return \Illuminate\Http\Response
-     */
+    
     public function destroy(Following $following)
     {
-        //
+        $following->delete();
+        return redirect()->back();
     }
 }
