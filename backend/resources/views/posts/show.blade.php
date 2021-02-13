@@ -64,9 +64,17 @@
     @endforeach
   </div>
   
+  @if ($errors->any())
+    <ul class="p-0 h5 text-danger">
+      @foreach ($errors->all() as $error)
+          <li>{{ $error }}</li>
+      @endforeach
+    </ul>
+  @endif
+
   <form method="POST" action="{{ route('comment.store', $post) }}" class="input-group">
     {{ csrf_field() }}
-    <textarea class="form-control" name="text" placeholder="コメントしてください"></textarea>
+    <textarea class="form-control" name="text" placeholder="コメントしてください">{{ old('text') }}</textarea>
     <div class="input-group-append">
       <input class="btn btn-outline-secondary" type="submit">
     </div>
