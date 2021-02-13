@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Post;
-use Illuminate\Http\Request;
+use App\Http\Requests\PostRequest;
 use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller
@@ -12,6 +12,7 @@ class PostController extends Controller
     {
         $this->middleware('auth');
     }
+
     public function index()
     {
         $posts = Post::orderBy('created_at', 'desc')->get();
@@ -23,21 +24,15 @@ class PostController extends Controller
         return view('posts.create');
     }
 
-    public function store(Request $request)
+    public function store(PostRequest $request)
     {
-        $params = $request->validate([
-            'text' => 'required|max:300',
-        ]);
-
-        if (Auth::check()) {
-            $user_id = Auth::id();
+        $user_id = Auth::id();
 
         $post = new Post();
         $post->text = $request->text;
         $post->user_id = $user_id;
         $post->save();
         return redirect()->route('post.show', $post);
-        }
     }
 
     public function show(Post $post)
@@ -50,12 +45,10 @@ class PostController extends Controller
         return view('posts.edit', ['post' => $post]);
     }
 
-    public function update(Request $request, Post $post)
+    public function update(PostRequest $request, Post $post)
     {
-        $params = $request->validate([
-            'text' => 'required|max:300'
-        ]);
-        $post->update($params);
+        $post->text = $request->text;
+        $post->update();
         return redirect()->route('post.show', ['post' => $post]);
     }
 

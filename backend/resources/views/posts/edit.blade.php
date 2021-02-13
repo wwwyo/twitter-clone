@@ -8,16 +8,14 @@
     {{ csrf_field() }}
     {{ method_field('PATCH') }}
     @if ($errors->any())
-      <div class="alert">
-        <ul>
-          @foreach ($errors->all() as $errror)
+        <ul class="p-0 h5 text-danger">
+          @foreach ($errors->all() as $error)
               <li>{{ $error }}</li>
           @endforeach
         </ul>
-      </div>
     @endif
     <div class="form-group">
-      <textarea name="text" id="text" cols="100" rows="10" placeholder="投稿内容を記載してください">{{ $post->text }}</textarea>
+      <textarea class="p-3 h5 w-100" name="text" id="text" rows="10" placeholder="投稿内容を記載してください">{{ old('text',$post->text ) }}</textarea>
     </div>
     <input type="submit" class="btn btn-primary mb-3" style="width: 20%;" value="編集"/>
   </form>

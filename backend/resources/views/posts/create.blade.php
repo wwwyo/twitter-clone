@@ -7,16 +7,14 @@
   <form method="POST" action="{{ route('post.store') }}">
     {{ csrf_field() }}
     @if ($errors->any())
-      <div class="alert">
-        <ul>
-          @foreach ($errors->all() as $errror)
+        <ul class="p-0 h5 text-danger">
+          @foreach ($errors->all() as $error)
               <li>{{ $error }}</li>
           @endforeach
         </ul>
-      </div>
     @endif
     <div class="form-group">
-      <textarea class="p-3" name="text" id="text" cols="100" rows="10" placeholder="投稿内容を記載してください"></textarea>
+      <textarea class="p-3 h5 w-100" name="text" id="text" rows="10" placeholder="投稿内容を記載してください">{{ old('text') }}</textarea>
     </div>
     <input type="submit" class="btn btn-primary" style="width: 20%;"/>
   </form>
