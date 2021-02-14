@@ -42,11 +42,19 @@ class PostController extends Controller
 
     public function edit(Post $post)
     {
+        $user_id = Auth::id();
+        if ($user_id !== $post->user_id) {
+            return redirect()->back();
+        }
         return view('posts.edit', ['post' => $post]);
     }
 
     public function update(PostRequest $request, Post $post)
     {
+        $user_id = Auth::id();
+        if ($user_id !== $post->user_id) {
+            return redirect()->back();
+        }
         $post->text = $request->text;
         $post->update();
         return redirect()->route('post.show', ['post' => $post]);
@@ -54,6 +62,10 @@ class PostController extends Controller
 
     public function destroy(Post $post)
     {
+        $user_id = Auth::id();
+        if ($user_id !== $post->user_id) {
+            return redirect()->back();
+        }
         $post->delete();
         return redirect(route('post.index'));
     }
