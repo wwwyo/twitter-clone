@@ -23,18 +23,18 @@ class CommentTest extends TestCase
     public function testStore()
     {
         $post = factory(Post::class)->create();
-        $before_posts_table_count = Comment::all()->count();
-        $response = $this->actingAs($this->user)->from("post/$post->id")->post("post/$post->id/comment", ['text' => 'コメントコメント', 'user_id' => $this->user->id, 'post_id' => $post->id]);
+        $before_comments_table_count = Comment::all()->count();
+        $response = $this->actingAs($this->user)->from("post/$post->id")->post("post/$post->id/comment", ['text' => 'コメントコメント', "post" => $post]);
         $response->assertStatus(302);
-        $this->assertEquals(Comment::all()->count(), $before_posts_table_count + 1);
+        $this->assertEquals(Comment::all()->count(), $before_comments_table_count + 1);
     }
 
     public function testStoreRedirectWithoutLogging()
     {
         $post = factory(Post::class)->create();
-        $before_posts_table_count = Comment::all()->count();
-        $response = $this->from("post/$post->id")->post("post/$post->id/comment", ['text' => 'コメントコメント', 'user_id' => $this->user->id, 'post_id' => $post->id]);
+        $before_comments_table_count = Comment::all()->count();
+        $response = $this->from("post/$post->id")->post("post/$post->id/comment", ['text' => 'コメントコメント', "post" => $post]);
         $response->assertStatus(302);
-        $this->assertEquals(Comment::all()->count(), $before_posts_table_count); 
+        $this->assertEquals(Comment::all()->count(), $before_comments_table_count); 
     }
 }

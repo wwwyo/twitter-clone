@@ -24,6 +24,10 @@ class FollowingController extends Controller
     {
         $login_user_id = Auth::id();
 
+        if ($user->id === $login_user_id) {
+            return redirect()->back();
+        }
+
         $following = new Following();
         $following->user_id = $login_user_id;
         $following->following_user_id = $user->id;

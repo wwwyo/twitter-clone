@@ -36,4 +36,38 @@ class UserTest extends TestCase
         $response->assertStatus(302);
         $this->assertEquals(User::all()->count(), $before_user_table_count); 
     }
+
+    public function testShowOwnPage()
+    {
+        $user = factory(User::class)->create();
+        $response = $this->actingAs($user)->get("user/$user->id");
+        $response->assertStatus(200);
+        $response->assertSee('ログアウト');
+    }
+
+    public function testShowDontOwnPage()
+    {
+        $user1 = factory(User::class)->create();
+        $user2 = factory(User::class)->create();
+        $response = $this->actingAs($user1)->get("user/$user2->id");
+        $response->assertStatus(200);
+        $response->assertSee('フォローする');
+    }
+
+    public function testShowLikeOwnPage()
+    {
+        $user = factory(User::class)->create();
+        $response = $this->actingAs($user)->get("user/$user->id/like");
+        $response->assertStatus(200);
+        $response->assertSee('ログアウト');
+    }
+
+    public function testShowLikeDontOwnPage()
+    {
+        $user1 = factory(User::class)->create();
+        $user2 = factory(User::class)->create();
+        $response = $this->actingAs($user1)->get("user/$user2->id/like");
+        $response->assertStatus(200);
+        $response->assertSee('フォローする');
+    }
 }
