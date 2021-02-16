@@ -6,7 +6,7 @@
             </a>
             @if ($post->isPostOwner(Auth::user()))
                 <a href="{{ route('post.edit', $post)}}" class="card__edit-link">
-                  <i class="fas fa-edit"></i>
+                    <i class="fas fa-edit"></i>
                 </a>
             @endif
         </div>

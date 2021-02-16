@@ -3,7 +3,7 @@
 
 @section('content')
     @foreach($posts as $post)
-      @include('layouts.card', ['post' => $post])
+        @include('layouts.card', ['post' => $post])
     @endforeach
 @endsection
 

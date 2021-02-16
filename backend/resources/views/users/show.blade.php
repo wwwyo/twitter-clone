@@ -2,7 +2,7 @@
 
 @section('content')
     <p class="font-weight-bold border-bottom mb-3" style="font-size: 2rem;">
-      ユーザー詳細
+        ユーザー詳細
     </p>
 
     <div class="card border-0" style="width: 100%;">
@@ -12,10 +12,10 @@
 
             <div class="d-flex justify-content-between">
                 <div class="user__show-card--link user__show--post-link" style="width: 49%;">
-                  投稿
+                    投稿
                 </div>
                 <a href="{{ route('user.showLike', $user) }}" class="user__show-card--link user__show--like-link text-reset" style="width: 49%; text-decoration: none;">
-                  いいね
+                    いいね
                 </a>
             </div>
         </div>

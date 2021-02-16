@@ -13,14 +13,14 @@ class PostController extends Controller
         $this->middleware('auth');
         $this->middleware('filter_own_post', [
             'only' => [
-                'edit', 'update', 'delete'
+                'edit', 'update', 'destroy'
             ]
         ]);
     }
 
     public function index()
     {
-        $posts = Post::orderBy('created_at', 'desc')->get();
+        $posts = Post::with('comments')->orderBy('created_at', 'desc')->get();
         return view('posts.index', ['posts' => $posts]);
     }
 

@@ -3,7 +3,7 @@
 @section('content')
 
     <p class="font-weight-bold border-bottom mb-3" style="font-size: 2rem;">
-      投稿詳細
+        投稿詳細
     </p>
 
     @include('layouts.card', ['post' => $post])
@@ -13,7 +13,7 @@
             <div class="card border-0">
                 <div class="card-body">
                     <h5 class="card-title">
-                      {{ $comment->user->name }}
+                        {{ $comment->user->name }}
                     </h5>
                     <p class="card-text">
                         {!! nl2br(e($comment->text)) !!}
