@@ -35,8 +35,11 @@ class FollowingController extends Controller
         return redirect()->back();
     }
 
-    public function destroy(Following $following)
+    public function destroy(User $user)
     {
+        $login_user_id = Auth::id();
+
+        $following = Following::where('user_id', $login_user_id)->where('following_user_id', $user->id)->first();
         $following->delete();
         return redirect()->back();
     }

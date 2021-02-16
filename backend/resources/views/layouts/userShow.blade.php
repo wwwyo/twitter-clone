@@ -9,7 +9,7 @@
         </form>
     @else 
         @if (Auth::user()->findFollowingUser($user))
-            <form method="POST" action="{{ route('following.destroy', Auth::user()->findFollowingUser($user)) }}" class="card__edit-link">
+            <form method="POST" action="{{ route('following.destroy', $user) }}" class="card__edit-link">
                 {{ csrf_field() }}
                 {{ method_field('DELETE') }}
                 <input type="submit" value="フォロー中" class="btn btn-sm btn-primary">

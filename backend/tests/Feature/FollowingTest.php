@@ -73,9 +73,11 @@ class FollowingTest extends TestCase
 
     public function testDelete()
     {
-        $following = factory(Following::class)->create();
+        $following = factory(Following::class)->make();
+        $following->user_id = $this->user->id;
+        $following->save();
         $before_followings_table_count = Following::all()->count();
-        $response = $this->actingAs($this->user)->from("user/$following->user_id")->delete("user/following/$following->id" , ['following' => $following]);
+        $response = $this->actingAs($this->user)->from("user/$following->user_id")->delete("user/$following->following_user_id/following" , ['user' => $following->following_user]);
         $response->assertStatus(302);
         $this->assertEquals(Following::all()->count(), $before_followings_table_count - 1);
     }
@@ -84,7 +86,7 @@ class FollowingTest extends TestCase
     {
         $following = factory(Following::class)->create();
         $before_followings_table_count = Following::all()->count();
-        $response = $this->from("user/$following->user_id")->delete("user/following/$following->id" , ['following' => $following]);
+        $response = $this->from("user/$following->user_id")->delete("user/$following->following_user_id/following" , ['user' => $following->following_user]);
         $response->assertStatus(302);
         $this->assertEquals(Following::all()->count(), $before_followings_table_count); 
     }
