@@ -14,7 +14,7 @@ class LikeController extends Controller
         $this->middleware('auth');
     }
     
-    public function store(Post $post, Request $request)
+    public function store(Post $post)
     {
         $user_id = Auth::id();
 

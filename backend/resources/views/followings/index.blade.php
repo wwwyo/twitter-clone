@@ -4,6 +4,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             @if ($user->followings->count())
+            {{-- 自分のフォローユーザー / followersテーブル --}}
                 @foreach ($user->followings as $following_user_id)
                 
                     <div class="card">
@@ -12,6 +13,7 @@
                                 <a href="{{ route('user.show', $following_user_id->following_user) }}" class="m-0 text-reset h3">{{ $following_user_id->following_user->name }}</p>
                             </div>
                             <div class="d-flex justify-content-end flex-grow-1 d-inline">
+                                {{-- n+1  --}}
                                 @if (Auth::user()->findFollowingUser($following_user_id->following_user))
                                     <form method="POST" action="{{ route('following.destroy', $following_user_id->following_user) }}">
                                         {{ csrf_field() }}

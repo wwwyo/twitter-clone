@@ -9,6 +9,7 @@
     @include('layouts.card', ['post' => $post])
 
     <div class="comment__container">
+        {{-- n+1 --}}
         @foreach ($post->comments as $comment)
             <div class="card border-0">
                 <div class="card-body">
