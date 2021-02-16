@@ -22,16 +22,6 @@ li {
 }
 
 /* post-index */
-.card__container {
-  text-decoration: none;
-}
-
-
-
-.card__icon-menu {
-  
-}
-
 .card__edit-link {
   display: inline-block;
   margin: 0 0 0 auto;

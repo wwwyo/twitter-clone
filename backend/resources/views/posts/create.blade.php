@@ -6,13 +6,8 @@
   </p>
   <form method="POST" action="{{ route('post.store') }}">
     {{ csrf_field() }}
-    @if ($errors->any())
-        <ul class="p-0 h5 text-danger">
-          @foreach ($errors->all() as $error)
-              <li>{{ $error }}</li>
-          @endforeach
-        </ul>
-    @endif
+    
+    @include('layouts.errors')
     <div class="form-group">
       <textarea class="p-3 h5 w-100" name="text" id="text" rows="10" placeholder="投稿内容を記載してください">{{ old('text') }}</textarea>
     </div>

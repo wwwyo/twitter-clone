@@ -11,6 +11,7 @@ use App\Like;
 
 class User extends Authenticatable
 {
+    
     use Notifiable;
 
     /**

@@ -42,31 +42,34 @@ class PostController extends Controller
 
     public function edit(Post $post)
     {
-        $user_id = Auth::id();
-        if ($user_id !== $post->user_id) {
-            return redirect()->back();
+        $user = Auth::user();
+        if ($post->isPostOwner($user)) {
+            return view('posts.edit', ['post' => $post]);
         }
-        return view('posts.edit', ['post' => $post]);
+        
+        return redirect()->back();
     }
 
     public function update(PostRequest $request, Post $post)
     {
-        $user_id = Auth::id();
-        if ($user_id !== $post->user_id) {
-            return redirect()->back();
+        $user = Auth::user();
+        if ($post->isPostOwner($user)) {
+            $post->text = $request->text;
+            $post->update();
+            return redirect()->route('post.show', ['post' => $post]);
         }
-        $post->text = $request->text;
-        $post->update();
-        return redirect()->route('post.show', ['post' => $post]);
+
+        return redirect()->back(); 
     }
 
     public function destroy(Post $post)
     {
-        $user_id = Auth::id();
-        if ($user_id !== $post->user_id) {
-            return redirect()->back();
+        $user = Auth::user();
+        if ($post->isPostOwner($user)) {
+            $post->delete();
+            return redirect(route('post.index'));
         }
-        $post->delete();
-        return redirect(route('post.index'));
+
+        return redirect()->back();
     }
 }
