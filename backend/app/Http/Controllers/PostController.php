@@ -11,6 +11,11 @@ class PostController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
+        $this->middleware('filter_own_post', [
+            'only' => [
+                'edit', 'update', 'delete'
+            ]
+        ]);
     }
 
     public function index()
@@ -42,34 +47,19 @@ class PostController extends Controller
 
     public function edit(Post $post)
     {
-        $user = Auth::user();
-        if ($post->isPostOwner($user)) {
-            return view('posts.edit', ['post' => $post]);
-        }
-        
-        return redirect()->back();
+        return view('posts.edit', ['post' => $post]);
     }
 
     public function update(PostRequest $request, Post $post)
     {
-        $user = Auth::user();
-        if ($post->isPostOwner($user)) {
-            $post->text = $request->text;
-            $post->update();
-            return redirect()->route('post.show', ['post' => $post]);
-        }
-
-        return redirect()->back(); 
+        $post->text = $request->text;
+        $post->update();
+        return redirect()->route('post.show', ['post' => $post]);
     }
 
     public function destroy(Post $post)
     {
-        $user = Auth::user();
-        if ($post->isPostOwner($user)) {
-            $post->delete();
-            return redirect(route('post.index'));
-        }
-
-        return redirect()->back();
+        $post->delete();
+        return redirect(route('post.index'));
     }
 }
