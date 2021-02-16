@@ -11,6 +11,7 @@ use App\Like;
 
 class User extends Authenticatable
 {
+
     use Notifiable;
 
     /**
@@ -49,5 +50,10 @@ class User extends Authenticatable
     public function likes()
     {
         return $this->hasMany(Like::class);
+    }
+
+    public function findFollowingUser(User $following_user)
+    {
+        return $this->followings()->where('following_user_id', $following_user->id)->first();
     }
 }

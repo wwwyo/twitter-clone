@@ -18,30 +18,7 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        @auth
-            <div class="header__icon-group">
-                <a class="header__icon" href="{{ route('post.index') }}">
-                    <i class="fas fa-home fa-2x"></i>
-                </a>
-                <a class="header__icon" href="{{ route('user.show', Auth::id()) }}">
-                    <i class="fas fa-user fa-2x"></i>
-                </a>
-                <a class="header__icon" href="{{ route('post.create') }}">
-                    <i class="fas fa-plus-circle fa-2x"></i>
-                </a>
-            </div>
-        @else
-            <li class="nav-item">
-                <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
-            </li>
-            @if (Route::has('register'))
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-                </li>
-            @endif
-        @endauth
-    </nav>
+    @include('layouts.header')
 
     <div class="container">
         @yield('content')
@@ -49,6 +26,8 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/card.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/userShow.js') }}"></script>
     <!-- Bootstrap -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
