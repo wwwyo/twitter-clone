@@ -25,8 +25,9 @@ class Post extends Model
 
     public function likes()
     {
+        // return dd($this->belongsToMany(User::class, "likes"));
+        
         return $this->hasMany(Like::class);
-        // belongsToMany(User::class, "likes")
     }
 
     public function isPostOwner(User $user): bool
